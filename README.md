@@ -5,5 +5,6 @@ I had a (small) problem. I had a playlist with all of my favorite songs (around 
 
 Whenever this script is run, it will find all the songs in my "favorites" playlist not in my "genre A" nor "genre B" playlist. It will create a new "uncategorized" playlist containing those songs (any songs previously in the "uncategorized" playlist will be removed). This will allow me to simply go through the "uncategorized" playlist at any time convenient for me, and categorize my songs as I see fit. 
 
-This script utilizes the `gmusicapi`, an unofficial Google Music client library, which can be found in [this](https://github.com/simon-weber/gmusicapi) repo. 
+This script utilizes the `gmusicapi`, an unofficial Google Music client library, which can be found in [this](https://github.com/simon-weber/gmusicapi) repository. 
 
+The only requirement to run this script is a valid installation of Python (the `gmusicapi` documentation specifies the versions of Python that are compatible with the library), and the `gmusicapi` library, which can be installed using `pip install gmusicapi`, as specified in the library's docs. I am using `Python 3.6.4`, and I have added my dependencies in a `requirements.txt` file for easy installation. 
