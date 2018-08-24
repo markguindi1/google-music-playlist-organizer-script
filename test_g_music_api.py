@@ -1,4 +1,10 @@
 from gmusicapi import Mobileclient
+# secret.py contains sensitive information, as well as the names of the
+# playlists the script will be working with. The names should be self-explanatory:
+# secret.BIG_PLAYLIST
+# secret.UNCATEGORIZED
+# secret.CATEGORY_A
+# secret.CATEGORY_B
 import secret
 
 
@@ -45,3 +51,5 @@ if not category_b:
     playlists = api.get_all_user_playlist_contents()
     category_b = [p for p in playlists if p['id'] == category_b_id]
 category_b = category_b[0]
+
+# To complete here
