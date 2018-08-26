@@ -67,4 +67,4 @@ uncategorized_id = uncategorized['id']
 
 print("Adding uncategorized songs to playlist named",  secret.UNCATEGORIZED)
 api.add_songs_to_playlist(uncategorized_id, uncategorized_songs)
-print("Success! Added", len(uncategorized_songs), "to playlist named", secret.UNCATEGORIZED)
+print("Success! Added", len(uncategorized_songs), "songs to playlist named", secret.UNCATEGORIZED)
