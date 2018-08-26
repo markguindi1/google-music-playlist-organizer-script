@@ -32,15 +32,19 @@ if uncategorized_lst:
     api.delete_playlist(playlist_id)
 
 api.create_playlist(secret.UNCATEGORIZED)
+print("Created playlist for uncategorized songs, named", secret.UNCATEGORIZED)
 
 # If "Category A"playlist does not exist, create it
 if not category_a_lst:
     api.create_playlist(secret.CATEGORY_A)
+    print("Created playlist named",  secret.CATEGORY_A)
 
 # If "Category B"playlist does not exist, create it
 if not category_b_lst:
     api.create_playlist(secret.CATEGORY_B)
+    print("Created playlist named",  secret.CATEGORY_B)
 
+print("Finding uncategorized songs...")
 playlists = api.get_all_user_playlist_contents()
 playlists_to_use = [p for p in playlists if p['name'] in (secret.BIG_PLAYLIST, secret.UNCATEGORIZED, secret.CATEGORY_A, secret.CATEGORY_B)]
 big_playlist = [p for p in playlists_to_use if p['name'] == secret.BIG_PLAYLIST][0]
@@ -58,5 +62,9 @@ categorized_songs = cat_a_songs | cat_b_songs
 uncategorized_songs = all_songs_set - categorized_songs
 uncategorized_songs = list(uncategorized_songs)
 
+# Add songs to playlist
 uncategorized_id = uncategorized['id']
+
+print("Adding uncategorized songs to playlist named",  secret.UNCATEGORIZED)
 api.add_songs_to_playlist(uncategorized_id, uncategorized_songs)
+print("Success! Added", len(uncategorized_songs), "to playlist named", secret.UNCATEGORIZED)
