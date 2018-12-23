@@ -10,7 +10,9 @@ import secret
 
 api = Mobileclient()
 api.login(secret.USERNAME, secret.PASSWORD, Mobileclient.FROM_MAC_ADDRESS)
+print("Logged in as", secret.USERNAME)
 
+print("Getting playlist data...")
 playlists = api.get_all_playlists()
 
 # Gets the playlists we are working with: The playlist with all the songs, the
@@ -68,3 +70,5 @@ uncategorized_id = uncategorized['id']
 print("Adding uncategorized songs to playlist named",  secret.UNCATEGORIZED)
 api.add_songs_to_playlist(uncategorized_id, uncategorized_songs)
 print("Success! Added", len(uncategorized_songs), "songs to playlist named", secret.UNCATEGORIZED)
+api.logout()
+print("Logged out")
