@@ -26,15 +26,17 @@ uncategorized_lst = [p for p in playlists_to_use if p['name'] == secret.UNCATEGO
 category_a_lst = [p for p in playlists_to_use if p['name'] == secret.CATEGORY_A]
 category_b_lst = [p for p in playlists_to_use if p['name'] == secret.CATEGORY_B]
 
-# If "Uncategorized" playlist already exists, we want it empty so we can
-# populate it with new uncategorized songs, and the easient way to do that is to
-# delete it and recreate it.
+# If "Uncategorized" playlist already exists, remove all songs from it.
+# Otherwise create the playlist.
 if uncategorized_lst:
-    playlist_id = uncategorized_lst[0]['id']
-    api.delete_playlist(playlist_id)
-
-api.create_playlist(secret.UNCATEGORIZED)
-print("Created playlist for uncategorized songs, named", secret.UNCATEGORIZED)
+    uncategorized_playlist = uncategorized_lst[0]
+    if 'tracks' in uncategorized_playlist:
+        old_uncategorized_songs = list({song['id'] for song in uncategorized_playlist['tracks']})
+        api.remove_entries_from_playlist(old_uncategorized_songs)
+        print("Cleared all songs from uncategorized playlist named", secret.UNCATEGORIZED)
+else:
+    api.create_playlist(secret.UNCATEGORIZED)
+    print("Created playlist for uncategorized songs, named", secret.UNCATEGORIZED)
 
 # If "Category A"playlist does not exist, create it
 if not category_a_lst:
