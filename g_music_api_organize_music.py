@@ -18,21 +18,20 @@ playlists = api.get_all_playlists()
 # Gets the playlists we are working with: The playlist with all the songs, the
 # playlist that will hold uncategorized songs, and the playlists for the two
 # categories
-playlists_to_use = [p for p in playlists if p['name'] in (secret.BIG_PLAYLIST, secret.UNCATEGORIZED, secret.CATEGORY_A, secret.CATEGORY_B)]
-
 # It is valid to assume that the playlist which holds ALL songs already exists
-big_playlist = [p for p in playlists_to_use if p['name'] == secret.BIG_PLAYLIST][0]
-uncategorized_lst = [p for p in playlists_to_use if p['name'] == secret.UNCATEGORIZED]
-category_a_lst = [p for p in playlists_to_use if p['name'] == secret.CATEGORY_A]
-category_b_lst = [p for p in playlists_to_use if p['name'] == secret.CATEGORY_B]
+big_playlist = [p for p in playlists if p['name'] == secret.BIG_PLAYLIST][0]
+uncategorized_lst = [p for p in playlists if p['name'] == secret.UNCATEGORIZED]
+category_a_lst = [p for p in playlists if p['name'] == secret.CATEGORY_A]
+category_b_lst = [p for p in playlists if p['name'] == secret.CATEGORY_B]
 
 # If "Uncategorized" playlist already exists, remove all songs from it.
 # Otherwise create the playlist.
 if uncategorized_lst:
     uncategorized_playlist = uncategorized_lst[0]
     if 'tracks' in uncategorized_playlist:
-        old_uncategorized_songs = list({song['id'] for song in uncategorized_playlist['tracks']})
-        api.remove_entries_from_playlist(old_uncategorized_songs)
+        old_uncategorized_songs_set = {song['id'] for song in uncategorized_playlist['tracks']}
+        old_uncategorized_songs_lst = list(old_uncategorized_songs_set)
+        api.remove_entries_from_playlist(old_uncategorized_songs_lst)
         print("Cleared all songs from uncategorized playlist named", secret.UNCATEGORIZED)
 else:
     api.create_playlist(secret.UNCATEGORIZED)
