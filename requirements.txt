@@ -1,6 +1,6 @@
 appdirs==1.4.3
 beautifulsoup4==4.6.3
-certifi==2018.8.13
+certifi==2022.12.7
 chardet==3.0.4
 decorator==4.3.0
 future==0.16.0
